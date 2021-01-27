@@ -13,14 +13,15 @@ part 'login_mobile.dart';
 class LoginView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    LoginViewModel viewModel =
-        LoginViewModel(authenticationService: Provider.of(context));
     return ChangeNotifierProvider(
-        create: (context) => viewModel,
-        child: ScreenTypeLayout(
-          mobile: _LoginMobile(viewModel),
-          desktop: _LoginMobile(viewModel),
-          tablet: _LoginMobile(viewModel),
-        ));
+        create: (context) => LoginViewModel(
+            authenticationService: Provider.of(context, listen: false)),
+        child: Consumer<LoginViewModel>(builder: (context, viewModel, child) {
+          return ScreenTypeLayout(
+            mobile: _LoginMobile(viewModel),
+            desktop: _LoginMobile(viewModel),
+            tablet: _LoginMobile(viewModel),
+          );
+        }));
   }
 }

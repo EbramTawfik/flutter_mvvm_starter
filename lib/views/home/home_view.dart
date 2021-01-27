@@ -15,14 +15,18 @@ part 'home_mobile.dart';
 class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    HomeViewModel viewModel = HomeViewModel(api: Provider.of(context));
-    viewModel.getPosts(Provider.of<User>(context).id);
+    var vm = HomeViewModel(api: Provider.of(context));
+    vm.getPosts(Provider.of<User>(context).id);
     return ChangeNotifierProvider(
-        create: (context) => viewModel,
-        child: ScreenTypeLayout(
-          mobile: _HomeMobile(viewModel),
-          desktop: _HomeMobile(viewModel),
-          tablet: _HomeMobile(viewModel),
+        create: (context) => vm,
+        child: Consumer<HomeViewModel>(
+          builder: (context, viewModel, child) {
+            return ScreenTypeLayout(
+              mobile: _HomeMobile(viewModel),
+              desktop: _HomeMobile(viewModel),
+              tablet: _HomeMobile(viewModel),
+            );
+          },
         ));
   }
 }
