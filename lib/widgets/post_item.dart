@@ -1,9 +1,10 @@
-part of post_list_item_widget;
+import 'package:flutter_mvvm_starter/core/models/post.dart';
+import 'package:flutter/material.dart';
 
-class _PostItemMobile extends StatelessWidget {
+class PostItem extends StatelessWidget {
   final Post post;
   final Function onTap;
-  const _PostItemMobile({this.post, this.onTap});
+  const PostItem({this.post, this.onTap});
 
   @override
   Widget build(BuildContext context) {

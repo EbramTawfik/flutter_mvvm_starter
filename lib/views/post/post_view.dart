@@ -1,17 +1,12 @@
-library post_view;
-
 import 'package:flutter_mvvm_starter/core/models/post.dart';
 import 'package:flutter_mvvm_starter/core/models/user.dart';
 import 'package:flutter_mvvm_starter/theme/app_colors.dart';
 import 'package:flutter_mvvm_starter/theme/text_styles.dart';
 import 'package:flutter_mvvm_starter/theme/ui_helpers.dart';
-import 'package:flutter_mvvm_starter/widgets/comments_list/comments_list.dart';
+import 'package:flutter_mvvm_starter/widgets/comments_list.dart';
 import 'package:provider/provider.dart';
-import 'package:responsive_builder/responsive_builder.dart';
 import 'package:flutter/material.dart';
 import 'post_view_model.dart';
-
-part 'post_mobile.dart';
 
 class PostView extends StatelessWidget {
   final Post post;
@@ -24,12 +19,32 @@ class PostView extends StatelessWidget {
         create: (context) => vm,
         child: Consumer<PostViewModel>(
           builder: (context, viewModel, child) {
-            return ScreenTypeLayout(
-              mobile: _PostMobile(vm, post),
-              desktop: _PostMobile(vm, post),
-              tablet: _PostMobile(vm, post),
-            );
+            return _buildView(context, viewModel, post);
           },
         ));
+  }
+
+  @override
+  Widget _buildView(BuildContext context, PostViewModel viewModel, Post post) {
+    return Scaffold(
+      backgroundColor: backgroundColor,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            UIHelper.verticalSpaceLarge,
+            Text(post.title, style: headerStyle),
+            Text(
+              'by ${Provider.of<User>(context).name}',
+              style: TextStyle(fontSize: 9.0),
+            ),
+            UIHelper.verticalSpaceMedium,
+            Text(post.body),
+            Expanded(child: CommentsList(post.id))
+          ],
+        ),
+      ),
+    );
   }
 }

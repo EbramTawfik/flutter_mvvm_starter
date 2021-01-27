@@ -1,12 +1,15 @@
-part of comments_list_widget;
+import 'package:flutter_mvvm_starter/views/post/post_view_model.dart';
+import 'package:flutter_mvvm_starter/widgets/comment_item.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter/material.dart';
 
-class _CommentsListMobile extends StatelessWidget {
+class CommentsList extends StatelessWidget {
   final int postId;
-  final PostViewModel viewModel;
-  _CommentsListMobile(this.postId, this.viewModel);
+  CommentsList(this.postId);
 
   @override
   Widget build(BuildContext context) {
+    final viewModel = Provider.of<PostViewModel>(context);
     return viewModel.busy
         ? Center(
             child: CircularProgressIndicator(),

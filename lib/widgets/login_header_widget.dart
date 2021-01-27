@@ -1,9 +1,13 @@
-part of login_header_widget;
+import 'package:flutter_mvvm_starter/theme/text_styles.dart';
+import 'package:flutter_mvvm_starter/theme/ui_helpers.dart';
+import 'package:flutter_mvvm_starter/views/login/login_view_model.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter/material.dart';
 
-class _LoginHeaderMobile extends StatelessWidget {
+class LoginHeaderWidget extends StatelessWidget {
   final String validationMessage;
 
-  _LoginHeaderMobile({this.validationMessage});
+  LoginHeaderWidget({this.validationMessage});
 
   @override
   Widget build(BuildContext context) {

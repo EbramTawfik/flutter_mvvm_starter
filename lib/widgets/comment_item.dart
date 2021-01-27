@@ -1,8 +1,11 @@
-part of comment_list_item_widget;
+import 'package:flutter_mvvm_starter/core/models/comment.dart';
+import 'package:flutter_mvvm_starter/theme/app_colors.dart';
+import 'package:flutter_mvvm_starter/theme/ui_helpers.dart';
+import 'package:flutter/material.dart';
 
-class _CommentItemMobile extends StatelessWidget {
+class CommentItem extends StatelessWidget {
   final Comment comment;
-  const _CommentItemMobile(this.comment);
+  const CommentItem(this.comment);
 
   @override
   Widget build(BuildContext context) {
