@@ -24,7 +24,6 @@ class PostView extends StatelessWidget {
         ));
   }
 
-  @override
   Widget _buildView(BuildContext context, PostViewModel viewModel, Post post) {
     return Scaffold(
       backgroundColor: backgroundColor,
@@ -41,7 +40,7 @@ class PostView extends StatelessWidget {
             ),
             UIHelper.verticalSpaceMedium,
             Text(post.body),
-            Expanded(child: CommentsList(post.id))
+            Expanded(child: CommentsList())
           ],
         ),
       ),
