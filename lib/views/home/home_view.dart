@@ -15,8 +15,10 @@ part 'home_mobile.dart';
 class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var user = Provider.of<User>(context);
+    if (user == null) return Container();
     var vm = HomeViewModel(api: Provider.of(context));
-    vm.getPosts(Provider.of<User>(context).id);
+    vm.getPosts(user.id);
     return ChangeNotifierProvider(
         create: (context) => vm,
         child: Consumer<HomeViewModel>(

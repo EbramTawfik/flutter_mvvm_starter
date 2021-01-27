@@ -16,12 +16,14 @@ class LoginView extends StatelessWidget {
     return ChangeNotifierProvider(
         create: (context) => LoginViewModel(
             authenticationService: Provider.of(context, listen: false)),
-        child: Consumer<LoginViewModel>(builder: (context, viewModel, child) {
-          return ScreenTypeLayout(
-            mobile: _LoginMobile(viewModel),
-            desktop: _LoginMobile(viewModel),
-            tablet: _LoginMobile(viewModel),
-          );
-        }));
+        child: Consumer<LoginViewModel>(
+          builder: (context, viewModel, child) {
+            return ScreenTypeLayout(
+              mobile: _LoginMobile(viewModel),
+              desktop: _LoginMobile(viewModel),
+              tablet: _LoginMobile(viewModel),
+            );
+          },
+        ));
   }
 }

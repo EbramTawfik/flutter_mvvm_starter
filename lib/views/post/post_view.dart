@@ -18,14 +18,18 @@ class PostView extends StatelessWidget {
   const PostView({Key key, this.post}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    PostViewModel viewModel = PostViewModel(api: Provider.of(context));
-    viewModel.fetchComments(post.id);
+    PostViewModel vm = PostViewModel(api: Provider.of(context));
+    vm.fetchComments(post.id);
     return ChangeNotifierProvider(
-        create: (context) => viewModel,
-        child: ScreenTypeLayout(
-          mobile: _PostMobile(viewModel, post),
-          desktop: _PostMobile(viewModel, post),
-          tablet: _PostMobile(viewModel, post),
+        create: (context) => vm,
+        child: Consumer<PostViewModel>(
+          builder: (context, viewModel, child) {
+            return ScreenTypeLayout(
+              mobile: _PostMobile(vm, post),
+              desktop: _PostMobile(vm, post),
+              tablet: _PostMobile(vm, post),
+            );
+          },
         ));
   }
 }

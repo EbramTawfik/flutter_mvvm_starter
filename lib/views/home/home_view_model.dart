@@ -5,15 +5,17 @@ import 'package:flutter_mvvm_starter/core/services/api.dart';
 
 class HomeViewModel extends BaseViewModel {
   Api _api;
-  List<Post> posts = List<Post>();
+  List<Post> posts = [];
 
   HomeViewModel({
     @required Api api,
   }) : _api = api;
   Future getPosts(int userId) async {
-    busy = true;
-    posts = await _api.getPostsForUser(userId);
-    busy = false;
-    notifyListeners();
+    if (userId != null) {
+      busy = true;
+      posts = await _api.getPostsForUser(userId);
+      busy = false;
+      notifyListeners();
+    }
   }
 }
