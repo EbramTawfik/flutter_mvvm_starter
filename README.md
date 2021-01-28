@@ -1,4 +1,4 @@
-# Simple Flutter MVVM
+# Simple Flutter MVVM using [provider](https://pub.dev/packages/provider)
 
 Flutter simple MVVM Architecture using only [provider](https://pub.dev/packages/provider).
 
