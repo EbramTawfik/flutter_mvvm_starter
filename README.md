@@ -12,7 +12,7 @@ The Architecture is easy to understand if you are familiar with Angular, WPF MVV
 
   The [providers file](https://github.com/EbramTawfik/flutter_mvvm_starter/blob/main/lib/core/providers.dart) is the holder of all the services that can be injected in the ViewModels. The dependency injection is using [provider](https://pub.dev/packages/provider) (Similar to services concept in Angular)
 
-  **The project is just a demo/POC so feel free to modify or suggest any changes**
+  **The project is just a Demo/POC so feel free to modify or suggest any changes**
 
 ## Getting Started
 
