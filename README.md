@@ -1,6 +1,16 @@
-# flutter_mvvm_starter
+# Simple Flutter MVVM
 
-A new Flutter project.
+Flutter simple MVVM Architecture using only [provider](https://pub.dev/packages/provider).
+
+The Architecture is easy to understand if you are familiar with Angular, WPF MVVM, Xamarin MVVM or any MVVM architecture.
+
+- Views/ViewModels:
+
+  For each View there is a ViewModel and the binding between the View and ViewModel is done using [provider](https://pub.dev/packages/provider) (similar to html/ts files in Angular or Xaml/ ViewModel CSharp).
+
+- Services injection:
+
+  The [providers file](https://github.com/EbramTawfik/flutter_mvvm_starter/blob/main/lib/core/providers.dart) is the holder of all the services that can be injected in the ViewModels. The dependency injection is using [provider](https://pub.dev/packages/provider) (Similar to services concept in Angular)
 
 ## Getting Started
 
