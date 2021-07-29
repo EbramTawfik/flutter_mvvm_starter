@@ -10,7 +10,9 @@ class LoginView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
         create: (context) => LoginViewModel(
-            authenticationService: Provider.of(context, listen: false)),
+              authenticationService: Provider.of(context, listen: false),
+              configService: Provider.of(context, listen: false),
+            ),
         child: Consumer<LoginViewModel>(
           builder: (context, viewModel, child) {
             return _buildView(viewModel, context);

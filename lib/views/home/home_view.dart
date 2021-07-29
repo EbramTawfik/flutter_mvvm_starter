@@ -1,6 +1,8 @@
 library home_view;
 
 import 'package:flutter_mvvm_starter/core/models/user.dart';
+import 'package:flutter_mvvm_starter/core/services/authentication_service.dart';
+import 'package:flutter_mvvm_starter/core/services/config_service.dart';
 import 'package:flutter_mvvm_starter/theme/app_colors.dart';
 import 'package:flutter_mvvm_starter/theme/text_styles.dart';
 import 'package:flutter_mvvm_starter/theme/ui_helpers.dart';
@@ -12,7 +14,7 @@ import 'home_view_model.dart';
 class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var user = Provider.of<User>(context);
+    var user = Provider.of<ConfigService>(context, listen: false).user;
     if (user == null) return Container();
     var vm = HomeViewModel(api: Provider.of(context));
     vm.getPosts(user.id);
@@ -35,7 +37,7 @@ class HomeView extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 20.0),
             child: Text(
-              'Welcome ${Provider.of<User>(context).name}',
+              'Welcome ${Provider.of<ConfigService>(context)?.user?.name ?? ""}',
               style: headerStyle,
             ),
           ),
