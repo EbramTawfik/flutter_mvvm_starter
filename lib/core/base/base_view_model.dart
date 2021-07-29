@@ -1,30 +1,30 @@
 import 'package:flutter/foundation.dart';
 import 'package:logger/logger.dart';
-import '../logger.dart';
+import 'package:flutter_mvvm_starter/core/logger.dart';
 
 class BaseViewModel extends ChangeNotifier {
-  String _title;
-  bool _busy;
-  Logger log;
+  late final String _title;
+  bool _busy = false;
+  late final Logger log;
   bool _isDisposed = false;
 
   BaseViewModel({
     bool busy = false,
-    String title,
-  })  : _busy = busy,
-      _title = title {
+    String? title,
+  }) : _busy = busy {
+    _title = title ?? this.runtimeType.toString();
     log = getLogger(title ?? this.runtimeType.toString());
   }
 
   bool get busy => this._busy;
   bool get isDisposed => this._isDisposed;
-  String get title => _title ?? this.runtimeType.toString();
+  String get title => _title;
 
   set busy(bool busy) {
     log.i(
-        'busy: '
-        '$title is entering '
-        '${busy ? 'busy' : 'free'} state',
+      'busy: '
+      '$title is entering '
+      '${busy ? 'busy' : 'free'} state',
     );
     this._busy = busy;
     notifyListeners();
@@ -33,10 +33,10 @@ class BaseViewModel extends ChangeNotifier {
   @override
   void notifyListeners() {
     if (!isDisposed) {
-        super.notifyListeners();
+      super.notifyListeners();
     } else {
-        log.w('notifyListeners: Notify listeners called after '
-            '${title ?? this.runtimeType.toString()} has been disposed');
+      log.w('notifyListeners: Notify listeners called after '
+          '$title has been disposed');
     }
   }
 

@@ -33,8 +33,8 @@ class ResponseHandler {
   }
 
   static HttpResponse buildErrorMessage({
-    Response response,
-    String message,
+    Response? response,
+    String? message,
   }) {
     if (response == null) {
       return HttpResponse(

@@ -1,42 +1,37 @@
-import 'dart:developer' as prefix0;
 import 'package:logger/logger.dart';
 
 class SimpleLogPrinter extends LogPrinter {
   static int counter = 0;
+
   final String className;
+
+  final Map<Level, AnsiColor> levelColors = {
+    Level.verbose: AnsiColor.fg(250),
+    Level.debug: AnsiColor.fg(92),
+    Level.info: AnsiColor.fg(12),
+    Level.warning: AnsiColor.fg(214),
+    Level.error: AnsiColor.fg(196),
+    Level.wtf: AnsiColor.fg(199),
+  };
 
   SimpleLogPrinter(this.className);
 
   @override
-  void log(LogEvent event) {
-    prefix0.log(
-      event.message,
-      time: DateTime.now(),
-      level: () {
-        switch (event.level) {
-          case Level.verbose:
-            return 0;
-          case Level.debug:
-            return 500;
-          case Level.info:
-            return 0;
-          case Level.warning:
-            return 1500;
-          case Level.error:
-            return 2000;
-          case Level.wtf:
-            return 2000;
-          default:
-            return 2000;
-        }
-      }(),
-      name: className,
-      error: event.error,
-      sequenceNumber: counter += 1,
-    );
+  List<String> log(LogEvent event) {
+    String message = event.message;
+    AnsiColor color = levelColors[event.level] ?? AnsiColor.fg(92);
+    String className = this.className;
+    SimpleLogPrinter.counter += 1;
+    int sequenceNumber = SimpleLogPrinter.counter;
+
+    return [color('$sequenceNumber. [$className]: $message')];
   }
 }
 
 Logger getLogger(String className) {
-  return Logger(printer: SimpleLogPrinter(className));
+  return Logger(
+    printer: SimpleLogPrinter(
+      className,
+    ),
+  );
 }

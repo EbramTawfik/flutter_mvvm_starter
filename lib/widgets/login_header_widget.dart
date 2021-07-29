@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
 class LoginHeaderWidget extends StatelessWidget {
-  final String validationMessage;
+  final String? validationMessage;
 
   LoginHeaderWidget({this.validationMessage});
 
@@ -16,9 +16,7 @@ class LoginHeaderWidget extends StatelessWidget {
       UIHelper.verticalSpaceMedium,
       Text('Enter a number between 1 - 10', style: subHeaderStyle),
       LoginTextField(),
-      this.validationMessage != null
-          ? Text(validationMessage, style: TextStyle(color: Colors.red))
-          : Container()
+      Text(validationMessage ?? "", style: TextStyle(color: Colors.red))
     ]);
   }
 }

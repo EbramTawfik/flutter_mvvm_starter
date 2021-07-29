@@ -1,7 +1,12 @@
 class HttpResponse {
   bool succes;
-  String message;
+  String? message;
   dynamic body;
-  Map<String, String> headers;
-  HttpResponse({this.body, this.message, this.succes, this.headers});
+  Map<String, String>? headers;
+  HttpResponse({
+    this.body,
+    required this.message,
+    required this.succes,
+    this.headers,
+  });
 }

@@ -1,7 +1,6 @@
 library home_view;
 
 import 'package:flutter_mvvm_starter/core/models/user.dart';
-import 'package:flutter_mvvm_starter/core/services/authentication_service.dart';
 import 'package:flutter_mvvm_starter/core/services/config_service.dart';
 import 'package:flutter_mvvm_starter/theme/app_colors.dart';
 import 'package:flutter_mvvm_starter/theme/text_styles.dart';
@@ -14,10 +13,10 @@ import 'home_view_model.dart';
 class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var user = Provider.of<ConfigService>(context, listen: false).user;
+    var user = Provider.of<ConfigService>(context).user;
     if (user == null) return Container();
     var vm = HomeViewModel(api: Provider.of(context));
-    vm.getPosts(user.id);
+    vm.getPosts(user.id ?? 0);
     return ChangeNotifierProvider(
         create: (context) => vm,
         child: Consumer<HomeViewModel>(
@@ -37,7 +36,7 @@ class HomeView extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 20.0),
             child: Text(
-              'Welcome ${Provider.of<ConfigService>(context)?.user?.name ?? ""}',
+              'Welcome ${Provider.of<ConfigService>(context).user?.name ?? ""}',
               style: headerStyle,
             ),
           ),

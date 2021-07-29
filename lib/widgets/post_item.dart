@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 class PostItem extends StatelessWidget {
   final Post post;
-  final Function onTap;
-  const PostItem({this.post, this.onTap});
+  final VoidCallback onTap;
+  const PostItem({required this.post, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +26,10 @@ class PostItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
-              post.title,
+              post.title ?? "",
               style: TextStyle(fontWeight: FontWeight.w900, fontSize: 16.0),
             ),
-            Text(post.body, maxLines: 2, overflow: TextOverflow.ellipsis)
+            Text(post.body ?? "", maxLines: 2, overflow: TextOverflow.ellipsis)
           ],
         ),
       ),

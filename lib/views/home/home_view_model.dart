@@ -8,7 +8,7 @@ class HomeViewModel extends BaseViewModel {
   List<Post> posts = [];
 
   HomeViewModel({
-    @required Api api,
+    required Api api,
   }) : _api = api;
   Future getPosts(int userId) async {
     if (userId != null) {

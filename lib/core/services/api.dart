@@ -15,7 +15,7 @@ class Api extends BaseHttpService {
 
   Future<User> getUserProfile(int userId) async {
     // Get user profile for id
-    var response = await client.get('$endpoint/users/$userId');
+    var response = await client.get(Uri.parse('$endpoint/users/$userId'));
 
     // Convert and return
     return User.fromJson(json.decode(response.body));

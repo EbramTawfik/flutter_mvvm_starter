@@ -10,12 +10,12 @@ import 'package:flutter/material.dart';
 import 'post_view_model.dart';
 
 class PostView extends StatelessWidget {
-  final Post post;
-  const PostView({Key key, this.post}) : super(key: key);
+  late final Post post;
+  PostView({required this.post});
   @override
   Widget build(BuildContext context) {
     PostViewModel vm = PostViewModel(api: Provider.of(context));
-    vm.fetchComments(post.id);
+    vm.fetchComments(post.id ?? 0);
     return ChangeNotifierProvider(
         create: (context) => vm,
         child: Consumer<PostViewModel>(
@@ -34,13 +34,13 @@ class PostView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             UIHelper.verticalSpaceLarge,
-            Text(post.title, style: headerStyle),
+            Text(post.title ?? "", style: headerStyle),
             Text(
-              'by ${Provider.of<ConfigService>(context)?.user?.name ?? ""}',
+              'by ${Provider.of<ConfigService>(context).user?.name ?? ""}',
               style: TextStyle(fontSize: 9.0),
             ),
             UIHelper.verticalSpaceMedium,
-            Text(post.body),
+            Text(post.body ?? ""),
             Expanded(child: CommentsList())
           ],
         ),
